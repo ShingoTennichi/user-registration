@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// model references : https://www.prisma.io/docs/concepts/components/prisma-schema/data-model
+
+// * after create schemas, run `npx prisma migrate dev --name init`;
+// * above code runs `npx prisma generate` under the hood by default;
+// * At this time editting this file, I needed to move .env file to one down level;
+// * When the command does not work, check the privious migration file and directry change;
+
+datasource db {
+    provider = "cockroachdb"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model User {
+    id    String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    firstName  String @db.String(50)
+    lastName  String @db.String(50)
+    email String @unique
+    Posts Post[]
+}
+
+model Post {
+    id        Int      @id @default(sequence())
+    createAt  DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    title     String
+    body      String
+    user      User     @relation(fields: [userId], references: [id]) //make a relation to id in User model
+    userId    String   @db.Uuid
+}
+
+// * ===================================================
+// ! Data types on cockroachdb
+// String
+// Json
+// Bytes
+// Int
+// BigInt
+// Float
+// Decimal
+// Bool
+// DateTime
+// * ===================================================
+// @id --> PRIMARY KEY
+// @default() --> auto generate
+// @unique()
+// @db.
+// @relation(fields:[], references: [])
+// @map()
+// @@id([fieldName,fieldName])
+// @@unique([fieldName,fieldName]) --> it gives some fields constraints to be unique
+// * ===================================================
+// model Eg {
+//    id   String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//    id   Int      @id @default(sequence()) --> auto increment
+//    email @uniqu
+//    name String? --> this mens name field can accept null
+//    @@unique([id, email, name])
+//}
