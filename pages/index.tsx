@@ -81,9 +81,13 @@ export default function Home(props: Props) {
             body: JSON.stringify(user)
         })
 
-        const result: User[] = await data.json();
-        setUsers(result);
-        console.log('Updated a user info successfully');
+        const result: User[] | null = await data.json();
+        if(result !== null){
+            setUsers(result);
+            console.log('Updated a user info successfully');
+        } else {
+            console.log('Incorrect user ID is inputted');
+        }
     }
 
     return (
