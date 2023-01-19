@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useState, ChangeEvent, useEffect } from 'react';
+import { useState, ChangeEvent } from 'react';
 import { User } from './components/UserType';
 import styles from '../styles/Home.module.css';
 
@@ -55,8 +55,13 @@ export default function Home(props: Props) {
             body: JSON.stringify(user)
         })
         const result: User[] = await data.json();
-        setUsers(result);
-        console.log("Created a user successfully");
+        if(result !== null) {
+            setUsers(result);
+            console.log("Created a user successfully");
+        } else {
+            console.log("Failed to create a user");
+        }
+
     }
 
     async function deleteUser(): Promise<void> {
@@ -67,9 +72,14 @@ export default function Home(props: Props) {
             },
             body: JSON.stringify(user)
         });
-        const result: User[] = await data.json();
-        setUsers(result);
-        console.log("deleted a user successfully");
+
+        const result: User[] | null = await data.json();
+        if(result !== null) {
+            setUsers(result);
+            console.log("deleted a user successfully");
+        } else {
+            console.log('Incorrect user ID is inputted');
+        }
     }
 
     async function updateUser(): Promise<void> {

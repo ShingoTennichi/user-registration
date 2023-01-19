@@ -2,24 +2,26 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { User } from '../components/UserType';
 import { globalPrisma } from '../../prisma/globalPrismaClient';
 
-export default async function deleteUser(req: NextApiRequest, res: NextApiResponse): Promise<User[]> {
+export default async function deleteUser(req: NextApiRequest, res: NextApiResponse): Promise<User[] | void> {
     const { id } = JSON.parse(req.body);
     const prisma: globalPrisma = globalPrisma;
     // const deleteUser: User = await prisma.<tableName>.delete({where:{}});
-    const deleteUser: User | void = await prisma.user.delete({
+    const deleteUser: User | null = await prisma.user.delete({
     // 'where:{}' can have only one data to identify the data that will be deleted
         where: {
             id: id,
         }
     })
-    .catch((err) => console.log(err));
-    //console.log(`Deleted successfully. Check the deleted user info:`) // * debug
-    //console.log(deleteUser);
+    .catch((err) => {
+        console.log(err)
+        return null; // return null for json format
+    });
 
+    if(deleteUser === null) {
+        res.json(deleteUser); // deleteUser has to be sent over to res to terminate this process
+        return; // void
+    }
     const result = await prisma.user.findMany()
-    // .finally(() => {
-    //     prisma.$disconnect; // prisma has to be disconnected since it makes a connection to its data pool when a Client is initialized
-    // }); // return updated users
     res.json(result); // result has to be sent over to res to terminate this process
     return result;
 }
