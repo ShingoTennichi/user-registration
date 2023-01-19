@@ -15,10 +15,14 @@ export default async function createUser(req: NextApiRequest, res: NextApiRespon
             email: email
         }
     })
+    .catch((err) => console.log(err));
 
     // console.log(createUser); // * debag
-    const result: User[] = await prisma.user.findMany(); // return updated users
+    const result: User[] = await prisma.user.findMany()
+    .finally(() => {
+        prisma.$disconnect; // prisma has to be disconnected since it makes a connection to its data pool when a Client is initialized
+    }); // return updated users
     res.json(result); // result has to be sent over to res to terminate this process
-    prisma.$disconnect(); // prisma has to be disconnected since it makes a connection to its data pool when a Client is initialized
+    
     return result;
 }
