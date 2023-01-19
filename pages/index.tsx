@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useEffect } from 'react';
 import { User } from './components/UserType';
 import styles from '../styles/Home.module.css';
 
@@ -33,13 +33,16 @@ export default function Home(props: Props) {
     }
 
     async function getUsers(): Promise<void> {
-        const data: Response = await fetch('/api/get', {
+        const result = await fetch('/api/get', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
         })
-        const result = await data.json();
+        .then((data) => {
+            return data.json();
+        })
+        // * display the result on the console
         console.log(result);
     }
 
@@ -54,7 +57,6 @@ export default function Home(props: Props) {
         const result: User[] = await data.json();
         setUsers(result);
         console.log("Created a user successfully");
-        console.log(users);
     }
 
     async function deleteUser(): Promise<void> {
@@ -68,7 +70,6 @@ export default function Home(props: Props) {
         const result: User[] = await data.json();
         setUsers(result);
         console.log("deleted a user successfully");
-        console.log(users);
     }
 
     async function updateUser(): Promise<void> {
@@ -78,13 +79,11 @@ export default function Home(props: Props) {
                 'Content-Type': 'application-json'
             },
             body: JSON.stringify(user)
-        });
+        })
+
         const result: User[] = await data.json();
-        console.log("first")
-        console.log(result);
         setUsers(result);
-        // console.log('Updated a user info successfully');
-        // console.log(users);
+        console.log('Updated a user info successfully');
     }
 
     return (

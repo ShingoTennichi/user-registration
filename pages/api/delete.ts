@@ -12,8 +12,8 @@ export default async function deleteUser(req: NextApiRequest, res: NextApiRespon
             id: id,
         }
     })
-    console.log(`Deleted successfully. Check the deleted user info: ${deleteUser}`) // debug
-
+    //console.log(`Deleted successfully. Check the deleted user info:`) // * debug
+    //console.log(deleteUser);
 
     const result = await prisma.user.findMany(); // return updated users
     res.json(result); // result has to be sent over to res to terminate this process
