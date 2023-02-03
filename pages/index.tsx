@@ -43,7 +43,7 @@ export default function Home(props: Props) {
             return data.json();
         })
         // * display the result on the console
-        console.log(result);
+        // console.log(result); // * debug
     }
 
     async function createUser(): Promise<void> {
