@@ -1,6 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { User } from '../components/UserType';
 import { globalPrisma } from '../../prisma/globalPrismaClient';
+
+type User = {
+  id: string,
+  firstName: string,
+  lastName: string,
+  email: string
+}
 
 export default async function deleteUser(req: NextApiRequest, res: NextApiResponse): Promise<User[] | void> {
     const { id } = JSON.parse(req.body);

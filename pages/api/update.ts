@@ -1,6 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { User } from '../components/UserType';
 import { globalPrisma } from '../../prisma/globalPrismaClient';
+
+type User = {
+  id: string,
+  firstName: string,
+  lastName: string,
+  email: string
+}
 
 export default async function updateUser(req: NextApiRequest, res: NextApiResponse): Promise<User[] | void> {
     const { id, firstName, lastName, email } = JSON.parse(req.body);

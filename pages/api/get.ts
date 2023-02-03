@@ -1,6 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { User } from '../components/UserType';
 import { globalPrisma } from '../../prisma/globalPrismaClient';
+
+type User = {
+  id: string,
+  firstName: string,
+  lastName: string,
+  email: string
+}
 
 export default async function get(req: NextApiRequest, res: NextApiResponse): Promise<User[]> {
     const prisma: globalPrisma = globalPrisma;

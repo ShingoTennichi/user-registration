@@ -1,7 +1,13 @@
 import Head from 'next/head';
 import { useState, ChangeEvent } from 'react';
-import { User } from './components/UserType';
 import styles from '../styles/Home.module.css';
+
+type User = {
+  id: string,
+  firstName: string,
+  lastName: string,
+  email: string
+}
 
 type Props = {
     data: User[]
