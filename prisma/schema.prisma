@@ -8,30 +8,30 @@
 // * When the command does not work, check the privious migration file and directry change;
 
 datasource db {
-    provider = "cockroachdb"
-    url      = env("DATABASE_URL")
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 model User {
-    id    String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-    firstName  String @db.String(50)
-    lastName  String @db.String(50)
-    email String @unique
-    Posts Post[]
+  id        String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  firstName String @db.String(50)
+  lastName  String @db.String(50)
+  email     String @unique
+  Posts     Post[]
 }
 
 model Post {
-    id        Int      @id @default(sequence())
-    createAt  DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    title     String
-    body      String
-    user      User     @relation(fields: [userId], references: [id]) //make a relation to id in User model
-    userId    String   @db.Uuid
+  id        Int      @id @default(sequence())
+  createAt  DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String
+  body      String
+  user      User     @relation(fields: [userId], references: [id]) //make a relation to id in User model
+  userId    String   @db.Uuid
 }
 
 // * ===================================================
