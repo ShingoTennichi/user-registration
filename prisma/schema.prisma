@@ -4,7 +4,7 @@
 
 // * after create schemas, run `npx prisma migrate dev --name init`;
 // * above code runs `npx prisma generate` under the hood by default;
-// * At this time editting this file, I needed to move .env file to one down level;
+// ! .env file should belong to root directory
 // * When the command does not work, check the privious migration file and directry change;
 
 datasource db {

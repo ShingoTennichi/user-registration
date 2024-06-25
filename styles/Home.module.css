@@ -3,13 +3,88 @@
 }
 
 .container {
-  width: 400px;
-  border: solid white 1px;
+  width: 100%;
+  min-height: 285px;
+  border: solid var(--blue-950) 1px;
   padding: 10px 20px;
 }
 
+.btns {
+  display: flex;
+  padding: 1rem 0;
+}
+
+.btns button {
+  background-color: var(--black-300);
+  padding: 1rem;
+}
+
+.actionBtns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2rem;
+}
+
 .btn {
-  width: 150px;
-  height: 60px;
-  margin: 10px 20px;
+  width: 120px;
+  padding: 1rem;
+  margin: 1rem 0;
+  border: solid var(--black-900) 1px;
+  border-radius: 1rem;
+}
+
+.btnActive {
+  background-color: var(--black-400) !important;
+}
+
+.btnCreate {
+  background-color: var(--green-300);
+}
+
+.btnDelete {
+  background-color: var(--red-500);
+}
+
+.btnUpdate {
+  background-color: var(--yellow-300);
+}
+
+.btnLeft {
+  border-radius: 8px 0 0 8px;
+}
+
+.btnCenter {
+  border-left: solid var(--black-200) 1px;
+  border-right: solid var(--black-200) 1px;
+}
+
+.btnRight {
+  border-radius: 0 8px 8px 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  border: solid var(--blue-950) 1px;
+  padding: 10px 20px;
+}
+
+.table td {
+  text-align: center;
+}
+.container input {
+  padding: 0.5rem 1rem;
+  min-width: 300px;
+  border: none;
+  border-bottom: solid 1px var(--black-900);
+  background-color: inherit;
+}
+
+.userList {
+  width: 100%;
+  overflow-x: auto;
 }
