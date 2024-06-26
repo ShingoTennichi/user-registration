@@ -1,6 +1,6 @@
 # User Registration APP
 ## _Next.js, Prisma, and CockroachDB
 
-This is a simple CRUD App by Next.js introduced Prisma to manipulate CockroachDB cloud
+This is a web application that demonstrates user registration with Next.js, Prisma and CockroachDB
 
 https://user-registration-ver1.vercel.app/
