@@ -24,7 +24,7 @@ export default function UserList({
           </tr>
         </thead>
         <tbody>
-          {users.map((user, index) => {
+          {users?.map((user, index) => {
             return (
               <tr key={index}>
                 <td>{index + 1}</td>

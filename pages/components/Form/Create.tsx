@@ -26,7 +26,7 @@ export default function Create({
                   id="firstName"
                   type="text"
                   name="firstName"
-                  value={input.firstName}
+                  value={input?.firstName}
                   onChange={(e) => handleInput(e)}
                 />
               </td>
@@ -40,7 +40,7 @@ export default function Create({
                   id="lastName"
                   type="text"
                   name="lastName"
-                  value={input.lastName}
+                  value={input?.lastName}
                   onChange={(e) => handleInput(e)}
                 />
               </td>
@@ -54,7 +54,7 @@ export default function Create({
                   id="email"
                   type="email"
                   name="email"
-                  value={input.email}
+                  value={input?.email}
                   onChange={(e) => handleInput(e)}
                 />
               </td>
@@ -76,17 +76,6 @@ export default function Create({
   );
 }
 
-async function getUsers(): Promise<void> {
-  const response = await fetch("/api/get", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const data = await response.json();
-  console.log(data);
-}
-
 async function createUser(input: User, setUsers: Function): Promise<void> {
   const data: Response = await fetch("/api/create", {
     method: "POST",
@@ -98,8 +87,7 @@ async function createUser(input: User, setUsers: Function): Promise<void> {
   const result: User[] = await data.json();
   if (result !== null) {
     setUsers(result);
-    console.log("Created a input successfully");
   } else {
-    console.log("Failed to create a input");
+    throw new Error("Failed to create a input");
   }
 }

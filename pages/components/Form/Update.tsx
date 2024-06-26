@@ -27,7 +27,7 @@ export default function Update({
                     id="id"
                     type="text"
                     name="id"
-                    value={input.id}
+                    value={input?.id}
                     onChange={(e) => handleInput(e)}
                   />
                 </td>
@@ -41,7 +41,7 @@ export default function Update({
                     id="firstName"
                     type="text"
                     name="firstName"
-                    value={input.firstName}
+                    value={input?.firstName}
                     onChange={(e) => handleInput(e)}
                   />
                 </td>
@@ -55,7 +55,7 @@ export default function Update({
                     id="lastName"
                     type="text"
                     name="lastName"
-                    value={input.lastName}
+                    value={input?.lastName}
                     onChange={(e) => handleInput(e)}
                   />
                 </td>
@@ -69,7 +69,7 @@ export default function Update({
                     id="email"
                     type="email"
                     name="email"
-                    value={input.email}
+                    value={input?.email}
                     onChange={(e) => handleInput(e)}
                   />
                 </td>
@@ -104,8 +104,7 @@ async function updateUser(input: User, setUsers: Function): Promise<void> {
   const result: User[] | null = await data.json();
   if (result !== null) {
     setUsers(result);
-    console.log("Updated a input info successfully");
   } else {
-    console.log("Incorrect input ID is inputted");
+    throw new Error("Incorrect input ID is inputted");
   }
 }

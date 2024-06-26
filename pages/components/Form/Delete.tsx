@@ -27,7 +27,7 @@ export default function Delete({
                     id="id"
                     type="text"
                     name="id"
-                    value={input.id}
+                    value={input?.id}
                     onChange={(e) => handleInput(e)}
                   />
                 </td>
@@ -62,8 +62,7 @@ async function deleteUser(input: User, setUsers: Function): Promise<void> {
   const result: User[] | null = await data.json();
   if (result !== null) {
     setUsers(result);
-    console.log("deleted a input successfully");
   } else {
-    console.log("Incorrect input ID is inputted");
+    throw new Error("Incorrect input ID is inputted");
   }
 }
