@@ -56,23 +56,31 @@ export default function Home(props: Props) {
   return (
     <>
       <Head>
-        <title>CURD Demonstration App</title>
+        <title>User Registration App</title>
         <meta
           name="description"
-          content="Web application that demonstrates CRUD operations with Next.js, Prisma and CockroachDB"
+          content="Web application that demonstrates user registration with Next.js, Prisma and CockroachDB"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main>
-        <h2>CURD Demonstration App</h2>
+        <h2>User Registration App</h2>
         <Forms
           input={input}
           handleInput={handleInput}
           btnState={btnState}
           setUsers={setUsers}
         />
-        <Buttons btnState={btnState} setBtnState={setBtnState} handleInput={handleInput}/>
-        <UserList users={users} handleInput={handleInput} setBtnState={setBtnState}/>
+        <Buttons
+          btnState={btnState}
+          setBtnState={setBtnState}
+          handleInput={handleInput}
+        />
+        <UserList
+          users={users}
+          handleInput={handleInput}
+          setBtnState={setBtnState}
+        />
       </main>
     </>
   );
